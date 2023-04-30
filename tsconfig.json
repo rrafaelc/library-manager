@@ -3,7 +3,9 @@
     "target": "es2018",
     "lib": ["es5", "es6", "ES2018"],
     "baseUrl": "./",
-    "paths": {},
+    "paths": {
+      "@Domain/*": ["src/Domain/*"]
+    },
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "module": "commonjs",
