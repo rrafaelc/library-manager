@@ -1,16 +1,14 @@
-import express, { Request, Response } from 'express';
 import 'express-async-errors';
+import express, { Request, Response } from 'express';
 import cors from 'cors';
+import routes from '@Infrastructure/Routes';
 import AppError from '@Domain/Middlewares/Errors/AppError';
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
-
-app.get('/', (request: Request, response: Response) => {
-  return response.sendStatus(200);
-});
+app.use(routes);
 
 app.use((error: Error, request: Request, response: Response) => {
   if (error instanceof AppError) {
