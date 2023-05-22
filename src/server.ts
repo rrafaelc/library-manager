@@ -1,31 +1,31 @@
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
 import cors from 'cors';
+import routes from '@Infrastructure/Routes';
 import AppError from '@Domain/Middlewares/Errors/AppError';
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(routes);
 
-app.get('/', (request: Request, response: Response) => {
-  return response.sendStatus(200);
-});
+app.use(
+  (error: Error, request: Request, response: Response, next: NextFunction) => {
+    if (error instanceof AppError) {
+      return response.status(error.statusCode).json({
+        status: 'error',
+        message: error.message,
+      });
+    }
 
-app.use((error: Error, request: Request, response: Response) => {
-  if (error instanceof AppError) {
-    return response.status(error.statusCode).json({
+    return response.status(500).json({
       status: 'error',
-      message: error.message,
+      message: 'Internal server error',
+      innerException: error.message,
     });
-  }
-
-  return response.status(500).json({
-    status: 'error',
-    message: 'Internal Server Error',
-    innerException: error.message,
-  });
-});
+  },
+);
 
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3333;
 
