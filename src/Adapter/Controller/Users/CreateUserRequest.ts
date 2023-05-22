@@ -8,9 +8,9 @@ interface AddressProps {
 
 export interface CreateUserRequest {
   fullName: string;
-  cpf: string;
   email: string;
   password: string;
+  cpf: string;
   cellphone: string;
   address: AddressProps;
 }

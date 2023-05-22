@@ -11,13 +11,27 @@ export default class UserController implements IBaseController {
     throw new Error('Method not implemented.');
   }
   async create(request: Request, response: Response): Promise<Response> {
-    const data = request.body;
+    const {
+      fullName,
+      email,
+      password,
+      cpf,
+      cellphone,
+      address: { street, district, city, state, cep },
+    } = request.body;
 
     const createUser = new CreateUserService();
 
-    await createUser.execute(data);
+    const user = await createUser.execute({
+      fullName,
+      email,
+      password,
+      cpf,
+      cellphone,
+      address: { street, district, city, state, cep },
+    });
 
-    throw new AppError('Method not implemented.');
+    return response.json(user);
   }
   update(request: Request, response: Response): Promise<Response> {
     throw new Error('Method not implemented.');

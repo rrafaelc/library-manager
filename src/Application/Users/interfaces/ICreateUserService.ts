@@ -2,5 +2,12 @@
 import { CreateUserRequest } from '@Adapter/Controller/Users/CreateUserRequest';
 
 export interface ICreateUserService {
-  execute(data: CreateUserRequest): Promise<any>;
+  execute({
+    fullName,
+    email,
+    password,
+    cpf,
+    cellphone,
+    address: { street, district, city, state, cep },
+  }: CreateUserRequest): Promise<any>;
 }
