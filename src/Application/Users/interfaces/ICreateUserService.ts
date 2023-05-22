@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any  */
-import CreateUserDTO from 'src/Adapter/Controller/Users/CreateUserDTO';
+import { CreateUserRequest } from '@Adapter/Controller/Users/CreateUserRequest';
 
 export interface ICreateUserService {
-  execute(data: CreateUserDTO): Promise<any>;
+  execute(data: CreateUserRequest): Promise<any>;
 }
