@@ -9,7 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node dist/server.js",
-    "start:dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/server.ts",
+    "start:dev": "ts-node-dev -r tsconfig-paths/register --respawn --inspect --transpile-only --ignore-watch node_modules src/server.ts",
     "lint": "eslint src/** --ext .ts",
     "lint:fix": "eslint src/** --ext .ts --fix",
     "prisma:generate": "npx prisma migrate dev --create-only",
