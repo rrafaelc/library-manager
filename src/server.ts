@@ -1,8 +1,8 @@
 import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
 import cors from 'cors';
-import routes from '@Infrastructure/Routes';
-import AppError from '@Domain/Middlewares/Errors/AppError';
+import routes from '@Infrastructure/routes';
+import AppError from '@Domain/Middlewares/Errors/appError';
 
 const app = express();
 

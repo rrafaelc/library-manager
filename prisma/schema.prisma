@@ -9,3 +9,32 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id        String      @id @default(uuid())
+  full_name String
+  email     String      @unique
+  password  String
+  cpf_cnpj  String      @unique
+  Cellphone Cellphone[]
+  Address   Address[]
+}
+
+model Address {
+  id       String @id @default(uuid())
+  street   String
+  number   Int
+  district String
+  city     String
+  state    String
+  cep      String
+  user     User   @relation(fields: [userId], references: [id])
+  userId   String
+}
+
+model Cellphone {
+  id     String @id @default(uuid())
+  number String
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+}

@@ -1,13 +1,13 @@
-/* eslint-disable @typescript-eslint/no-explicit-any  */
-import { CreateUserRequest } from '@Adapter/Controller/Users/CreateUserRequest';
+import { User } from '@prisma/client';
+import { CreateUserDto } from '../dtos/createUserDto';
 
 export interface ICreateUserService {
   execute({
-    fullName,
+    full_name,
     email,
     password,
     cpf,
+    address,
     cellphone,
-    address: { street, district, city, state, cep },
-  }: CreateUserRequest): Promise<any>;
+  }: CreateUserDto): Promise<User>;
 }
