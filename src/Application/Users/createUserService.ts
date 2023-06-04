@@ -37,9 +37,12 @@ class CreateUserService implements ICreateUserService {
     });
 
     return {
+      id: userCreated.id,
       full_name: userCreated.full_name,
       email: userCreated.email,
       cpf_cnpj: userCreated.cpf_cnpj,
+      created_at: userCreated.created_at,
+      updated_at: userCreated.updated_at,
     };
   }
 }

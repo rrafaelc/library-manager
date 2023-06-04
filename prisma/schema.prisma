@@ -11,31 +11,37 @@ datasource db {
 }
 
 model User {
-  id        String      @id @default(uuid())
-  full_name String
-  email     String      @unique
-  password  String
-  cpf_cnpj  String      @unique
-  is_active String      @db.VarChar(1)
-  Cellphone Cellphone[]
-  Address   Address[]
+  id         String      @id @default(uuid())
+  full_name  String
+  email      String      @unique
+  password   String
+  cpf_cnpj   String      @unique
+  is_active  String      @db.VarChar(1)
+  created_at DateTime    @default(now())
+  updated_at DateTime    @updatedAt
+  Cellphone  Cellphone[]
+  Address    Address[]
 }
 
 model Address {
-  id       String @id @default(uuid())
-  street   String
-  number   Int
-  district String
-  city     String
-  state    String
-  cep      String
-  user     User   @relation(fields: [userId], references: [id])
-  userId   String
+  id         String   @id @default(uuid())
+  street     String
+  number     Int
+  district   String
+  city       String
+  state      String
+  cep        String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
 }
 
 model Cellphone {
-  id     String @id @default(uuid())
-  number String
-  user   User   @relation(fields: [userId], references: [id])
-  userId String
+  id         String   @id @default(uuid())
+  number     String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
 }
