@@ -22,6 +22,7 @@ class CreateUserService implements ICreateUserService {
       email,
       password: hashedPassword,
       cpf_cnpj,
+      is_active: 'A',
     });
   }
 }
