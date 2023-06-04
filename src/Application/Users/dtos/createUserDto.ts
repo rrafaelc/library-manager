@@ -3,5 +3,5 @@ export interface CreateUserDto {
   email: string;
   password: string;
   cpf_cnpj: string;
-  is_active: string;
+  is_active?: string;
 }
