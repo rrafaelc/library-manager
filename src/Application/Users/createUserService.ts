@@ -29,12 +29,18 @@ class CreateUserService implements ICreateUserService {
     if (userExistsEmail)
       throw new AppError(`There is already one user with this email ${email}`);
 
-    return await this.userRepository.create({
+    const userCreated = await this.userRepository.create({
       full_name,
       email,
       password: hashedPassword,
       cpf_cnpj,
     });
+
+    return {
+      full_name: userCreated.full_name,
+      email: userCreated.email,
+      cpf_cnpj: userCreated.cpf_cnpj,
+    };
   }
 }
 

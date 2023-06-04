@@ -5,26 +5,13 @@ export class UserRepository {
   private prisma = new PrismaClient();
 
   async find() {
-    return this.prisma.user.findMany({
-      select: {
-        id: true,
-        full_name: true,
-        email: true,
-        cpf_cnpj: true,
-      },
-    });
+    return this.prisma.user.findMany();
   }
 
   async findById(id: string) {
     return this.prisma.user.findFirst({
       where: {
         id,
-      },
-      select: {
-        id: true,
-        full_name: true,
-        email: true,
-        cpf_cnpj: true,
       },
     });
   }
@@ -34,12 +21,6 @@ export class UserRepository {
       where: {
         email,
       },
-      select: {
-        id: true,
-        full_name: true,
-        email: true,
-        cpf_cnpj: true,
-      },
     });
   }
 
@@ -47,12 +28,6 @@ export class UserRepository {
     return this.prisma.user.findFirst({
       where: {
         cpf_cnpj,
-      },
-      select: {
-        id: true,
-        full_name: true,
-        email: true,
-        cpf_cnpj: true,
       },
     });
   }
@@ -63,12 +38,6 @@ export class UserRepository {
         ...user,
         is_active: 'A',
       },
-      select: {
-        id: true,
-        full_name: true,
-        email: true,
-        cpf_cnpj: true,
-      },
     });
   }
 
@@ -78,12 +47,6 @@ export class UserRepository {
         id: user.id,
       },
       data: user,
-      select: {
-        id: true,
-        full_name: true,
-        email: true,
-        cpf_cnpj: true,
-      },
     });
   }
 
