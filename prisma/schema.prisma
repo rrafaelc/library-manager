@@ -16,6 +16,7 @@ model User {
   email     String      @unique
   password  String
   cpf_cnpj  String      @unique
+  is_active String      @db.VarChar(1)
   Cellphone Cellphone[]
   Address   Address[]
 }
