@@ -34,10 +34,7 @@ export class UserRepository {
 
   async create(user: CreateUserDto) {
     return this.prisma.user.create({
-      data: {
-        ...user,
-        is_active: 'A',
-      },
+      data: user,
     });
   }
 
@@ -47,18 +44,6 @@ export class UserRepository {
         id: user.id,
       },
       data: user,
-    });
-  }
-
-  async softDelete(user: User) {
-    return this.prisma.user.update({
-      where: {
-        id: user.id,
-      },
-      data: {
-        ...user,
-        is_active: 'I',
-      },
     });
   }
 

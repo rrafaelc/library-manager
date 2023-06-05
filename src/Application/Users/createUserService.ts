@@ -4,7 +4,7 @@ import { ICreateUserService } from './interfaces/ICreateUserService';
 import AppError from '@Domain/Middlewares/Errors/appError';
 import { CreateUserDto } from './dtos/createUserDto';
 import { UserRepository } from '@Domain/Users/userRepository';
-import { UserDto } from './dtos/userDto';
+import { User } from '@prisma/client';
 
 class CreateUserService implements ICreateUserService {
   private userRepository = new UserRepository();
@@ -14,7 +14,7 @@ class CreateUserService implements ICreateUserService {
     email,
     password,
     cpf_cnpj,
-  }: CreateUserDto): Promise<UserDto> {
+  }: CreateUserDto): Promise<User> {
     const hashedPassword = await hash(password, 8);
 
     const userExists = await this.userRepository.findByCpfCnpj(cpf_cnpj);
@@ -37,12 +37,8 @@ class CreateUserService implements ICreateUserService {
     });
 
     return {
-      id: userCreated.id,
-      full_name: userCreated.full_name,
-      email: userCreated.email,
-      cpf_cnpj: userCreated.cpf_cnpj,
-      created_at: userCreated.created_at,
-      updated_at: userCreated.updated_at,
+      ...userCreated,
+      password: '',
     };
   }
 }

@@ -1,5 +1,5 @@
+import { User } from '@prisma/client';
 import { CreateUserDto } from '../dtos/createUserDto';
-import { UserDto } from '../dtos/userDto';
 
 export interface ICreateUserService {
   execute({
@@ -7,5 +7,5 @@ export interface ICreateUserService {
     email,
     password,
     cpf_cnpj,
-  }: CreateUserDto): Promise<UserDto>;
+  }: CreateUserDto): Promise<User>;
 }
