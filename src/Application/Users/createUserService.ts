@@ -5,6 +5,7 @@ import AppError from '@Domain/Middlewares/Errors/appError';
 import { CreateUserDto } from './dtos/createUserDto';
 import { UserRepository } from '@Domain/Users/userRepository';
 import { User } from '@prisma/client';
+import { UserRole } from '@Domain/Users/enums/UserRole';
 
 class CreateUserService implements ICreateUserService {
   private userRepository = new UserRepository();
@@ -34,7 +35,7 @@ class CreateUserService implements ICreateUserService {
       email,
       password: hashedPassword,
       cpf_cnpj,
-      role: 'USER',
+      role: UserRole.USER,
     });
   }
 }
