@@ -1,21 +1,22 @@
 import { hash } from 'bcrypt';
-import { ICreateUserService } from './interfaces/ICreateUserService';
+import { ICreateUserService } from './ICreateUserService';
 
-import AppError from '@Domain/Middlewares/Errors/appError';
-import { CreateUserDto } from './dtos/createUserDto';
-import { UserRepository } from '@Domain/Users/userRepository';
+import AppError from '@Domain/Middlewares/Errors/AppError';
+import { CreateUserRequest } from '@Adapter/Controller/Users/CreateUserRequest';
+import { UserRepository } from '@Domain/Users/UserRepository';
+import { RoleRepository } from '@Domain/Roles/RoleRepository';
 import { User } from '@prisma/client';
-import { UserRole } from '@Domain/Users/enums/UserRole';
 
 class CreateUserService implements ICreateUserService {
   private userRepository = new UserRepository();
+  private roleRepository = new RoleRepository();
 
   async execute({
     full_name,
     email,
     password,
     cpf_cnpj,
-  }: CreateUserDto): Promise<User> {
+  }: CreateUserRequest): Promise<User> {
     const hashedPassword = await hash(password, 8);
 
     const userExists = await this.userRepository.findByCpfCnpj(cpf_cnpj);
@@ -30,12 +31,14 @@ class CreateUserService implements ICreateUserService {
     if (userExistsEmail)
       throw new AppError(`There is already one user with this email ${email}`);
 
+    const role = await this.roleRepository.findByName('USER');
+
     return this.userRepository.create({
       full_name,
       email,
       password: hashedPassword,
       cpf_cnpj,
-      role: UserRole.USER,
+      roleId: role?.id,
     });
   }
 }

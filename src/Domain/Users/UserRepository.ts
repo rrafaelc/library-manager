@@ -1,4 +1,4 @@
-import { CreateUserDto } from '@Application/Users/dtos/createUserDto';
+import { CreateUserRequest } from '@Adapter/Controller/Users/CreateUserRequest';
 import { PrismaClient, User } from '@prisma/client';
 
 export class UserRepository {
@@ -32,7 +32,7 @@ export class UserRepository {
     });
   }
 
-  async create(user: CreateUserDto) {
+  async create(user: CreateUserRequest) {
     return this.prisma.user.create({
       data: user,
     });
