@@ -31,13 +31,11 @@ class CreateSessionService implements ICreateSessionService {
 
     if (!role) throw new AppError('Role not found', 401);
 
-    authConfig.jwt.role = role.name;
-
     const secretKey = authConfig.jwt.secret;
 
     if (!secretKey) throw new AppError('Secret key is missing');
 
-    const token = sign({}, secretKey, {
+    const token = sign({ role: role.name }, secretKey, {
       subject: user.id.toString(),
       expiresIn: authConfig.jwt.expiresIn,
     });
