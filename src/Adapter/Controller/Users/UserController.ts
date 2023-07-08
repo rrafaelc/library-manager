@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { IBaseController } from '../IBaseController';
 import CreateUserService from '@Application/Users/CreateUserService';
 import ListUserService from '@Application/Users/ListUserService';
+import FindUserService from '@Application/Users/FindUserService';
 
 export default class UserController implements IBaseController {
   public async list(request: Request, response: Response): Promise<Response> {
@@ -12,8 +13,14 @@ export default class UserController implements IBaseController {
     return response.json(users);
   }
 
-  find(request: Request, response: Response): Promise<Response> {
-    throw new Error('Method not implemented.');
+  public async find(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+
+    const findUser = new FindUserService();
+
+    const user = await findUser.execute({ id });
+
+    return response.json(user);
   }
 
   public async create(request: Request, response: Response): Promise<Response> {

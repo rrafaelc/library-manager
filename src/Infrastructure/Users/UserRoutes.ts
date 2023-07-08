@@ -9,6 +9,7 @@ const usersController = new UserController();
 usersRouter.post('/', usersController.create);
 
 usersRouter.use(isAuthenticated);
+usersRouter.get('/:id', usersController.find);
 usersRouter.get('/', isAdmin, usersController.list);
 
 export default usersRouter;
