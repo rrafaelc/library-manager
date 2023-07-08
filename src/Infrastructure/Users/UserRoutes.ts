@@ -10,6 +10,9 @@ usersRouter.post('/', usersController.create);
 
 usersRouter.use(isAuthenticated);
 usersRouter.get('/:id', usersController.find);
-usersRouter.get('/', isAdmin, usersController.list);
+usersRouter.put('/', usersController.update);
+
+usersRouter.use(isAdmin);
+usersRouter.get('/', usersController.list);
 
 export default usersRouter;

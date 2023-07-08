@@ -3,6 +3,7 @@ import { IBaseController } from '../IBaseController';
 import CreateUserService from '@Application/Users/CreateUserService';
 import ListUserService from '@Application/Users/ListUserService';
 import FindUserService from '@Application/Users/FindUserService';
+import UpdateUserService from '@Application/Users/UpdateUserService';
 
 export default class UserController implements IBaseController {
   public async list(request: Request, response: Response): Promise<Response> {
@@ -38,8 +39,21 @@ export default class UserController implements IBaseController {
     return response.json(user);
   }
 
-  update(request: Request, response: Response): Promise<Response> {
-    throw new Error('Method not implemented.');
+  public async update(request: Request, response: Response): Promise<Response> {
+    const id = request.user.id;
+    const { full_name, email, password, cpf_cnpj } = request.body;
+
+    const updateUser = new UpdateUserService();
+
+    const userUpdated = await updateUser.execute({
+      id,
+      full_name,
+      email,
+      password,
+      cpf_cnpj,
+    });
+
+    return response.json(userUpdated);
   }
 
   delete(request: Request, response: Response): Promise<Response> {
