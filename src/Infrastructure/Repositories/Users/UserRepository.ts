@@ -1,15 +1,14 @@
 import { CreateUserRequest } from '@Adapter/Controller/Users/CreateUserRequest';
-import { PrismaClient, User } from '@prisma/client';
+import { User } from '@prisma/client';
+import { prisma } from '@Infrastructure/Databases/prisma';
 
 export class UserRepository {
-  private prisma = new PrismaClient();
-
   async find() {
-    return this.prisma.user.findMany();
+    return prisma.user.findMany();
   }
 
   async findById(id: string) {
-    return this.prisma.user.findFirst({
+    return prisma.user.findFirst({
       where: {
         id,
       },
@@ -17,7 +16,7 @@ export class UserRepository {
   }
 
   async findByEmail(email: string) {
-    return this.prisma.user.findFirst({
+    return prisma.user.findFirst({
       where: {
         email,
       },
@@ -25,7 +24,7 @@ export class UserRepository {
   }
 
   async findByCpfCnpj(cpf_cnpj: string) {
-    return this.prisma.user.findFirst({
+    return prisma.user.findFirst({
       where: {
         cpf_cnpj,
       },
@@ -33,13 +32,13 @@ export class UserRepository {
   }
 
   async create(user: CreateUserRequest) {
-    return this.prisma.user.create({
+    return prisma.user.create({
       data: user,
     });
   }
 
   async update(user: User) {
-    return this.prisma.user.update({
+    return prisma.user.update({
       where: {
         id: user.id,
       },
@@ -48,7 +47,7 @@ export class UserRepository {
   }
 
   async delete(user: User) {
-    return this.prisma.user.delete({
+    return prisma.user.delete({
       where: {
         id: user.id,
       },

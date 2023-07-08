@@ -3,8 +3,8 @@ import { ICreateUserService } from './ICreateUserService';
 
 import AppError from '@Domain/Middlewares/Errors/AppError';
 import { CreateUserRequest } from '@Adapter/Controller/Users/CreateUserRequest';
-import { UserRepository } from '@Domain/Users/UserRepository';
-import { RoleRepository } from '@Domain/Roles/RoleRepository';
+import { UserRepository } from '@Infrastructure/Repositories/Users/UserRepository';
+import { RoleRepository } from '@Infrastructure/Repositories/Roles/RoleRepository';
 import { User } from '@prisma/client';
 
 class CreateUserService implements ICreateUserService {

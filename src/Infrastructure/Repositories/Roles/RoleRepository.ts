@@ -1,10 +1,8 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '@Infrastructure/Databases/prisma';
 
 export class RoleRepository {
-  private prisma = new PrismaClient();
-
   async findById(id: string) {
-    return this.prisma.role.findFirst({
+    return prisma.role.findFirst({
       where: {
         id,
       },
@@ -12,7 +10,7 @@ export class RoleRepository {
   }
 
   async findByName(name: string) {
-    return this.prisma.role.findFirst({
+    return prisma.role.findFirst({
       where: {
         name,
       },

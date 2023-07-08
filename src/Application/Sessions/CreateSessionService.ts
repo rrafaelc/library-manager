@@ -2,8 +2,8 @@ import { CreateSessionRequest } from '@Adapter/Controller/Sessions/CreateSession
 import { CreateSessionResponse } from '@Adapter/Controller/Sessions/CreateSessionResponse';
 import { ICreateSessionService } from './ICreateSessionService';
 import AppError from '@Domain/Middlewares/Errors/AppError';
-import { UserRepository } from '@Domain/Users/UserRepository';
-import { RoleRepository } from '@Domain/Roles/RoleRepository';
+import { UserRepository } from '@Infrastructure/Repositories/Users/UserRepository';
+import { RoleRepository } from '@Infrastructure/Repositories/Roles/RoleRepository';
 import { compare } from 'bcrypt';
 import authConfig from '@Domain/Middlewares/Config/Auth';
 import { sign } from 'jsonwebtoken';

@@ -1,7 +1,7 @@
 import { UpdateUserRequest } from '@Adapter/Controller/Users/UpdateUserRequest';
 import { User } from '@prisma/client';
 import { IUpdateUserService } from './IUpdateUserService';
-import { UserRepository } from '@Domain/Users/UserRepository';
+import { UserRepository } from '@Infrastructure/Repositories/Users/UserRepository';
 import AppError from '@Domain/Middlewares/Errors/AppError';
 import { hash } from 'bcrypt';
 
