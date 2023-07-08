@@ -4,6 +4,7 @@ import CreateUserService from '@Application/Users/CreateUserService';
 import ListUserService from '@Application/Users/ListUserService';
 import FindUserService from '@Application/Users/FindUserService';
 import UpdateUserService from '@Application/Users/UpdateUserService';
+import DeleteUserService from '@Application/Users/DeleteUserService';
 
 export default class UserController implements IBaseController {
   public async list(request: Request, response: Response): Promise<Response> {
@@ -56,7 +57,13 @@ export default class UserController implements IBaseController {
     return response.json(userUpdated);
   }
 
-  delete(request: Request, response: Response): Promise<Response> {
-    throw new Error('Method not implemented.');
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+
+    const deleteUser = new DeleteUserService();
+
+    await deleteUser.execute({ id });
+
+    return response.sendStatus(204);
   }
 }
