@@ -17,8 +17,7 @@ routes.use('/loggedin', (request, response) => {
   response.send('Logged In!');
 });
 
-routes.use(isAdmin);
-routes.use('/admin', (request, response) => {
+routes.use('/admin', isAdmin, (request, response) => {
   console.log(request.user);
 
   response.send('Admin Logged In!');

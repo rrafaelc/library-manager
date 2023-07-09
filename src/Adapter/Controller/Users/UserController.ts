@@ -41,8 +41,7 @@ export default class UserController implements IBaseController {
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
-    const id = request.user.id;
-    const { full_name, email, password, cpf_cnpj } = request.body;
+    const { id, full_name, email, password, cpf_cnpj } = request.body;
 
     const updateUser = new UpdateUserService();
 
