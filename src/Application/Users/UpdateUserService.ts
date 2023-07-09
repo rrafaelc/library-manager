@@ -38,9 +38,7 @@ class UpdateUserService implements IUpdateUserService {
     user.password = password ? await hash(password, 8) : user.password;
     user.cpf_cnpj = cpf_cnpj ?? user.cpf_cnpj;
 
-    await this.userRepository.update(user);
-
-    return user;
+    return this.userRepository.update(user);
   }
 }
 

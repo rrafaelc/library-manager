@@ -42,7 +42,12 @@ export class UserRepository {
       where: {
         id: user.id,
       },
-      data: user,
+      data: {
+        full_name: user.full_name,
+        email: user.email,
+        password: user.password,
+        cpf_cnpj: user.cpf_cnpj,
+      },
     });
   }
 
